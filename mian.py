@@ -23,5 +23,18 @@ def eleccion_jugador():
 
 eleccion_jugador()
 
+def eleccion_ordenador():
+    import random
+    ordenador = random.randint(0, 3)
+    if ordenador == 0:
+        print("Piedra")
+    elif ordenador == 1:
+        print("Papel")
+    elif ordenador == 2:
+        print("Tijeras")
+
+
+eleccion_ordenador()
+
 
 
