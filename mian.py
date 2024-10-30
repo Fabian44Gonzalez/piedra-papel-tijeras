@@ -18,7 +18,15 @@ def escoger_rondas():
         else:
             print ("Selecciona un valor válido.")
 
-        
+
+def escoger_dificultad():
+    dificultad = ""
+    while dificultad != "facil" and dificultad != "normal" and dificultad != "dificil":
+        dificultad = input("Escoge la dificultad que quieras. Facil/Normal/Dificil").lower()
+        if dificultad == "facil" or dificultad == "normal" or dificultad == "dificil":
+            print("poner cosas")
+
+
 def eleccion_jugador():
     jugador = -1
 
