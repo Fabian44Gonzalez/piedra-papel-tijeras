@@ -36,17 +36,19 @@ def eleccion_ordenador():
     return ordenador
 
 
-ordenador  = eleccion_ordenador()
+ordenador = eleccion_ordenador()
 
 
-def resultado (eleccion_jugador, eleccion_ordenador):
+def resultado (jugador, ordenador):
 
-    if eleccion_jugador == eleccion_ordenador:
+    if jugador == ordenador:
         print("Empate")
         return 0 #Empate
-    elif (eleccion_jugador == 0 and eleccion_ordenador == 2) or (eleccion_jugador == 1 and eleccion_ordenador == 0) or (eleccion_jugador == 2 and eleccion_ordenador == 1):
+    elif (jugador == 0 and ordenador == 2) or (jugador == 1 and ordenador == 0) or (jugador == 2 and ordenador == 1):
         print("Ganaste la ronda")
         return 1 #Gana el usuario
     else:
         print("Perdiste la ronda")
         return -1 #Gana el ordenador
+
+resultado(jugador, ordenador)
