@@ -1,11 +1,14 @@
-print("Vas a jugar a piedra, papel, tijeras.")
+def instrucciones():
+    print("Vas a jugar a piedra, papel, tijeras.")
+    print("Gana el primero en llegr a 3 puntos, tu contrincante es el ordenador. Buena suerte!")
+
 
 def menu():
     print("0 -> Piedra")
     print("1 -> Papel")
     print("2 -> Tijeras")
 
-menu()
+
 
 def eleccion_jugador():
     jugador = -1
@@ -22,7 +25,6 @@ def eleccion_jugador():
             print("Escoge un valor correcto")
     return jugador
 
-jugador = eleccion_jugador()
 
 def eleccion_ordenador():
     import random
@@ -36,19 +38,34 @@ def eleccion_ordenador():
     return ordenador
 
 
-ordenador = eleccion_ordenador()
 
+def puntuacion ():
+    puntos_jugador = 0
+    puntos_ordenador = 0
 
-def resultado (jugador, ordenador):
+    while puntos_jugador <= 3 or puntos_ordenador <= 3:
 
-    if jugador == ordenador:
-        print("Empate")
-        return 0 #Empate
-    elif (jugador == 0 and ordenador == 2) or (jugador == 1 and ordenador == 0) or (jugador == 2 and ordenador == 1):
-        print("Ganaste la ronda")
-        return 1 #Gana el usuario
-    else:
-        print("Perdiste la ronda")
-        return -1 #Gana el ordenador
+        jugador = eleccion_jugador()
+        ordenador = eleccion_ordenador()
 
-resultado(jugador, ordenador)
+        if jugador == ordenador:
+            print("Empate")
+        elif (jugador == 0 and ordenador == 2) | (jugador == 1 and ordenador == 0) | (jugador == 2 and ordenador == 1):
+            puntos_jugador += 1 #Se suma en 1 el valor de los puntos del jugador 
+            print("Ganaste la ronda")
+        else:
+            puntos_ordenador += 1 #Se suma en 1 el valor de los puntos del ordenador
+            print("Perdiste la ronda")
+        
+        print("Tus puntos:", puntos_jugador, "Puntos ordenador:", puntos_ordenador)
+
+        if puntos_jugador == 3:
+            print("Felicidades, ganaste la partida")
+            return 1
+        if puntos_ordenador == 3:
+            print("Perdiste la partida, vuelve a intentarlo")
+            return 1
+
+instrucciones()
+menu()
+puntuacion()
