@@ -26,7 +26,7 @@ jugador = eleccion_jugador()
 
 def eleccion_ordenador():
     import random
-    ordenador = random.randint(0, 2)
+    ordenador = random.randint(0, 2) #El ordenador selecciona un numero al azar
     if ordenador == 0:
         print("Piedra")
     elif ordenador == 1:
@@ -38,5 +38,15 @@ def eleccion_ordenador():
 
 ordenador  = eleccion_ordenador()
 
-if ordenador == (jugador + 1) % 3:
-    print("Gana ordenador")
+
+def resultado (eleccion_jugador, eleccion_ordenador):
+
+    if eleccion_jugador == eleccion_ordenador:
+        print("Empate")
+        return 0 #Empate
+    elif (eleccion_jugador == 0 and eleccion_ordenador == 2) or (eleccion_jugador == 1 and eleccion_ordenador == 0) or (eleccion_jugador == 2 and eleccion_ordenador == 1):
+        print("Ganaste la ronda")
+        return 1 #Gana el usuario
+    else:
+        print("Perdiste la ronda")
+        return -1 #Gana el ordenador
