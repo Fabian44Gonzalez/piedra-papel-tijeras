@@ -1,11 +1,14 @@
-print("Vas a jugar a piedra, papel, tijeras.")
+def instrucciones():
+    print("Vas a jugar a piedra, papel, tijeras.")
+    print("Gana el primero en llegr a 3 puntos, tu contrincante es el ordenador. Buena suerte!")
+
 
 def menu():
     print("0 -> Piedra")
     print("1 -> Papel")
     print("2 -> Tijeras")
 
-menu()
+
 
 def eleccion_jugador():
     jugador = -1
@@ -63,6 +66,8 @@ def puntuacion ():
             print("Perdiste la partida, vuelve a intentarlo")
             return 1
 
+instrucciones()
+menu()
 puntuacion()
 
 
