@@ -1,6 +1,6 @@
 def instrucciones():
     print("Vas a jugar a piedra, papel, tijeras.")
-    print("Gana el primero en llegr a 3 puntos, tu contrincante es el ordenador. Buena suerte!")
+    print("Gana el primero en llegar a 3 puntos, tu contrincante es el ordenador. Buena suerte!")
 
 
 def menu():
@@ -9,7 +9,16 @@ def menu():
     print("2 -> Tijeras")
 
 
+def escoger_rondas():
+    rondas = 0
+    while rondas != 3 and rondas != 5 and rondas != 10:
+        rondas = int(input("¿Cuántas rondas quires jugar? Escoge entre 3, 5 o 10 rondas."))
+        if rondas == 3 or rondas == 5 or rondas == 10: #Verifica si el usuario introduce 3,5 o 10
+            print("Has seleccionado:", rondas, "rondas.")
+        else:
+            print ("Selecciona un valor válido.")
 
+        
 def eleccion_jugador():
     jugador = -1
 
@@ -36,7 +45,6 @@ def eleccion_ordenador():
     elif ordenador == 2:
         print("Tijeras")
     return ordenador
-
 
 
 def puntuacion ():
@@ -66,7 +74,10 @@ def puntuacion ():
             print("Perdiste la partida, vuelve a intentarlo")
             return 1
 
+
+#Inicia el juego
 instrucciones()
+escoger_rondas()
 menu()
 puntuacion()
 
