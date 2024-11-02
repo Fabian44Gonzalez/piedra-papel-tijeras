@@ -1,5 +1,8 @@
 import random
 
+PIEDRA = 0
+PAPEL = 1
+TIJERA = 2
 
 def instrucciones():
     print("Vas a jugar a piedra, papel, tijeras.")
@@ -18,6 +21,7 @@ def escoger_rondas():
         rondas = int(input("¿Cuántas rondas quires jugar? Escoge entre 3, 5 o 10 rondas."))
         if rondas == 3 or rondas == 5 or rondas == 10: #Verifica si el usuario introduce 3,5 o 10
             print("Has seleccionado:", rondas, "rondas.")
+            return rondas
         else:
             print ("Selecciona un valor válido.")
 
@@ -36,11 +40,11 @@ def eleccion_jugador():
 
     while jugador <= -1:
         jugador = int(input("Escoge tu elección"))
-        if jugador == 0:
+        if jugador == PIEDRA:
             print("Piedra")
-        elif jugador == 1:
+        elif jugador == PAPEL:
             print("Papel")
-        elif jugador == 2:
+        elif jugador == TIJERA:
             print("Tijeras")
         else:
             print("Escoge un valor correcto")
@@ -48,34 +52,32 @@ def eleccion_jugador():
 
 
 def eleccion_ordenador(dificultad, eleccion_jugador):
-    PIEDRA, PAPEL, TIJERA = 0, 1, 2
-
     if dificultad == "facil":
         if random.randint(0,1) == 0: 
-            return PIEDRA # 50% de probabilidades de elegir piedra
+            return PIEDRA # 50% de elegir piedra
         else:
-            return random.randint(PIEDRA,TIJERA) # 50% de probabilidades de elegir aleatoriamente
+            return random.randint(PIEDRA,TIJERA) # 50% de elegir aleatoriamente
     elif dificultad == "dificil":
-        if random.randint(1,10) <= 2: # 20% de probabilidades de elegir aleatoriamente
+        if random.randint(1,10) <= 2: # 20% de elegir aleatoriamente
             return random.randint(PIEDRA, TIJERA)
-        else: # 20% de probabilidades de elegir la opcion ganadora (el jugador siempre pierde)
+        else: # 20% de elegir la opcion ganadora 
             return (eleccion_jugador + 1) % 3 
-    else:
+    else: #dificultad normal
         return random.randint(0,2) # Escoge aleatoriamente
     
     
-def puntuacion ():
+def puntuacion (rondas, dificultad):
     puntos_jugador = 0
     puntos_ordenador = 0
 
     while puntos_jugador <= 3 or puntos_ordenador <= 3:
 
         jugador = eleccion_jugador()
-        ordenador = eleccion_ordenador()
+        ordenador = eleccion_ordenador(dificultad, jugador)
 
         if jugador == ordenador:
             print("Empate")
-        elif (jugador == 0 and ordenador == 2) | (jugador == 1 and ordenador == 0) | (jugador == 2 and ordenador == 1):
+        elif (jugador == PIEDRA and ordenador == TIJERA) | (jugador == PAPEL and ordenador == PIEDRA) | (jugador == TIJERA and ordenador == PAPEL):
             puntos_jugador += 1 #Se suma en 1 el valor de los puntos del jugador 
             print("Ganaste la ronda")
         else:
@@ -84,18 +86,18 @@ def puntuacion ():
         
         print("Tus puntos:", puntos_jugador, "Puntos ordenador:", puntos_ordenador)
 
-        if puntos_jugador == 3:
+        if puntos_jugador == rondas: #se termina cuando los puntos de jugador sean igual a las rondas seleccionadas
             print("Felicidades, ganaste la partida")
-        if puntos_ordenador == 3:
+        if puntos_ordenador == rondas: #se termina cuando los puntos del ordenador sean igual a las rondas seleccionadas
             print("Perdiste la partida, vuelve a intentarlo")
         
 
 
 #Inicia el juego
 instrucciones()
-escoger_rondas()
+rondas = escoger_rondas()
 dificultad = escoger_dificultad()
 menu()
-puntuacion()
+puntuacion(rondas, dificultad)
 
 
