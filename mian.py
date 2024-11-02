@@ -101,14 +101,17 @@ def puntuacion (rondas, dificultad):
             print("Has conseguido una racha de 3, ganas un pun to extra.")
             racha_jugador = 0 # Se reinicia la racha
 
-        if racha_ordenador == 3: ###################################################################
+        if racha_ordenador == 3 and (dificultad == FACIL or dificultad == NORMAL):
+            puntos_ordenador += 1
+            print("Has conseguido una racha de 3, ganas un pun to extra.")
+            racha_ordenador = 0 # Se reinicia la racha
 
-            print("Tus puntos:", puntos_jugador, "Puntos ordenador:", puntos_ordenador)
+        print("Tus puntos:", puntos_jugador, "Puntos ordenador:", puntos_ordenador)
 
-        if puntos_jugador == rondas: # Se termina cuando los puntos de jugador sean igual a las rondas seleccionadas
-            print("Felicidades, ganaste la partida")
-        if puntos_ordenador == rondas: # Se termina cuando los puntos del ordenador sean igual a las rondas seleccionadas
-            print("Perdiste la partida, vuelve a intentarlo")
+    if puntos_jugador == rondas: # Se termina cuando los puntos de jugador sean igual a las rondas seleccionadas
+        print("Felicidades, ganaste la partida")
+    if puntos_ordenador == rondas: # Se termina cuando los puntos del ordenador sean igual a las rondas seleccionadas
+        print("Perdiste la partida, vuelve a intentarlo")
         
 
 
