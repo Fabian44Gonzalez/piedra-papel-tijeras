@@ -1,3 +1,6 @@
+import random
+
+
 def instrucciones():
     print("Vas a jugar a piedra, papel, tijeras.")
     print("Gana el primero en llegar a 3 puntos, tu contrincante es el ordenador. Buena suerte!")
@@ -44,18 +47,23 @@ def eleccion_jugador():
     return jugador
 
 
-def eleccion_ordenador():
-    import random
-    ordenador = random.randint(0, 2) #El ordenador selecciona un numero al azar
-    if ordenador == 0:
-        print("Piedra")
-    elif ordenador == 1:
-        print("Papel")
-    elif ordenador == 2:
-        print("Tijeras")
-    return ordenador
+def eleccion_ordenador(dificultad, eleccion_jugador):
+    PIEDRA, PAPEL, TIJERA = 0, 1, 2
 
-
+    if dificultad == "facil":
+        if random.randint(0,1) == 0: 
+            return PIEDRA # 50% de probabilidades de elegir piedra
+        else:
+            return random.randint(PIEDRA,TIJERA) # 50% de probabilidades de elegir aleatoriamente
+    elif dificultad == "dificil":
+        if random.randint(1,10) <= 2: # 20% de probabilidades de elegir aleatoriamente
+            return random.randint(PIEDRA, TIJERA)
+        else: # 20% de probabilidades de elegir la opcion ganadora (el jugador siempre pierde)
+            return (eleccion_jugador + 1) % 3 
+    else:
+        return random.randint(0,2) # Escoge aleatoriamente
+    
+    
 def puntuacion ():
     puntos_jugador = 0
     puntos_ordenador = 0
@@ -78,10 +86,9 @@ def puntuacion ():
 
         if puntos_jugador == 3:
             print("Felicidades, ganaste la partida")
-            return 1
         if puntos_ordenador == 3:
             print("Perdiste la partida, vuelve a intentarlo")
-            return 1
+        
 
 
 #Inicia el juego
