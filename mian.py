@@ -69,7 +69,16 @@ def eleccion_ordenador(dificultad, eleccion_jugador):
     else: # Dificultad normal
         return random.randint(0,2) # Escoge aleatoriamente
     
-    
+def evento_fuego(jugador, ordenador): # Un evento que tiene un 20% de activarse, si eso pasa papel pierde automaticamente en dicha ronda
+    if random.randint(1,5) == 1:
+        print("Fuego ha aparecido en la partida, en esta ronda PAPEL pierde automaticamente.")
+        if jugador == PAPEL and ordenador != PAPEL: # Gana ordenador
+            return "ordenador"
+        elif ordenador == PAPEL and jugador != PAPEL: # Gana el jugador
+            return "jugador"
+    else:
+        return #### preguntar profe que poner aqui o si es mejor no poner else ##########
+
 def puntuacion (rondas, dificultad):
     puntos_jugador = 0
     puntos_ordenador = 0
@@ -81,30 +90,43 @@ def puntuacion (rondas, dificultad):
         jugador = eleccion_jugador()
         ordenador = eleccion_ordenador(dificultad, jugador)
 
-        if jugador == ordenador:
-            print("Empate")
+        fuego = evento_fuego(jugador, ordenador)
+        if fuego == "jugador":
+            puntos_jugador +=1
+            print("Fuego le dio la victoria de esta ronda a jugador")
+            racha_jugador += 1
+            racha_ordenador = 0
+        elif fuego == "ordenador":
+            puntos_ordenador +=1
+            print("Fuego le dio la victoria de esta ronda a ordenador")
+            racha_ordenador += 1
             racha_jugador = 0
-            racha_ordenador = 0
-        elif (jugador == PIEDRA and ordenador == TIJERA) or (jugador == PAPEL and ordenador == PIEDRA) or (jugador == TIJERA and ordenador == PAPEL):
-            puntos_jugador += 1 # Se suma en 1 el valor de los puntos del jugador 
-            racha_jugador += 1  # Se suma en 1 el valor de la racha de victorias del jugador 
-            racha_ordenador = 0
-            print("Ganaste la ronda")
         else:
-            puntos_ordenador += 1 # Se suma en 1 el valor de los puntos del ordenador
-            racha_ordenador += 1 # Se suma en 1 el valor de la racha de victorias del ordenador
-            racha_jugador = 0
-            print("Perdiste la ronda")
-        
-        if racha_jugador == 3 and (dificultad == FACIL or dificultad == NORMAL):
-            puntos_jugador += 1
-            print("Has conseguido una racha de 3, ganas un pun to extra.")
-            racha_jugador = 0 # Se reinicia la racha
+            # Se puntua la ronda normal, sin la funcion fuego
+            if jugador == ordenador:
+                print("Empate")
+                racha_jugador = 0
+                racha_ordenador = 0
+            elif (jugador == PIEDRA and ordenador == TIJERA) or (jugador == PAPEL and ordenador == PIEDRA) or (jugador == TIJERA and ordenador == PAPEL):
+                puntos_jugador += 1 # Se suma en 1 el valor de los puntos del jugador 
+                racha_jugador += 1  # Se suma en 1 el valor de la racha de victorias del jugador 
+                racha_ordenador = 0
+                print("Ganaste la ronda")
+            else:
+                puntos_ordenador += 1 # Se suma en 1 el valor de los puntos del ordenador
+                racha_ordenador += 1 # Se suma en 1 el valor de la racha de victorias del ordenador
+                racha_jugador = 0
+                print("Perdiste la ronda")
+            
+            if racha_jugador == 3 and (dificultad == FACIL or dificultad == NORMAL):
+                puntos_jugador += 1
+                print("Has conseguido una racha de 3, ganas un pun to extra.")
+                racha_jugador = 0 # Se reinicia la racha
 
-        if racha_ordenador == 3 and (dificultad == FACIL or dificultad == NORMAL):
-            puntos_ordenador += 1
-            print("Has conseguido una racha de 3, ganas un pun to extra.")
-            racha_ordenador = 0 # Se reinicia la racha
+            if racha_ordenador == 3 and (dificultad == FACIL or dificultad == NORMAL):
+                puntos_ordenador += 1
+                print("Has conseguido una racha de 3, ganas un pun to extra.")
+                racha_ordenador = 0 # Se reinicia la racha
 
         print("Tus puntos:", puntos_jugador, "Puntos ordenador:", puntos_ordenador)
 
