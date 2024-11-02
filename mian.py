@@ -24,7 +24,8 @@ def escoger_dificultad():
     while dificultad != "facil" and dificultad != "normal" and dificultad != "dificil":
         dificultad = input("Escoge la dificultad que quieras. Facil/Normal/Dificil").lower()
         if dificultad == "facil" or dificultad == "normal" or dificultad == "dificil":
-            print("poner cosas")
+            print("Selecciona una opcion válida")
+    return dificultad
 
 
 def eleccion_jugador():
@@ -86,6 +87,7 @@ def puntuacion ():
 #Inicia el juego
 instrucciones()
 escoger_rondas()
+dificultad = escoger_dificultad()
 menu()
 puntuacion()
 
