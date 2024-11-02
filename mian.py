@@ -30,7 +30,7 @@ def escoger_dificultad():
     dificultad = ""
     while dificultad != "facil" and dificultad != "normal" and dificultad != "dificil":
         dificultad = input("Escoge la dificultad que quieras. Facil/Normal/Dificil").lower()
-        if dificultad == "facil" or dificultad == "normal" or dificultad == "dificil":
+        if dificultad != "facil" or dificultad != "normal" or dificultad != "dificil":
             print("Selecciona una opcion válida")
     return dificultad
 
@@ -70,14 +70,14 @@ def puntuacion (rondas, dificultad):
     puntos_jugador = 0
     puntos_ordenador = 0
 
-    while puntos_jugador <= 3 or puntos_ordenador <= 3:
+    while puntos_jugador < rondas and puntos_ordenador < rondas:
 
         jugador = eleccion_jugador()
         ordenador = eleccion_ordenador(dificultad, jugador)
 
         if jugador == ordenador:
             print("Empate")
-        elif (jugador == PIEDRA and ordenador == TIJERA) | (jugador == PAPEL and ordenador == PIEDRA) | (jugador == TIJERA and ordenador == PAPEL):
+        elif (jugador == PIEDRA and ordenador == TIJERA) or (jugador == PAPEL and ordenador == PIEDRA) or (jugador == TIJERA and ordenador == PAPEL):
             puntos_jugador += 1 #Se suma en 1 el valor de los puntos del jugador 
             print("Ganaste la ronda")
         else:
