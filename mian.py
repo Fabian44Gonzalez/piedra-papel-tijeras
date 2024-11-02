@@ -1,8 +1,12 @@
 import random
-
+ # Seguir en funcion puntuacion haciendo racha ordenador
 PIEDRA = 0
 PAPEL = 1
 TIJERA = 2
+
+FACIL = "facil"
+NORMAL = "normal"
+DIFICIL = "dificil"
 
 def instrucciones():
     print("Vas a jugar a piedra, papel, tijeras.")
@@ -19,7 +23,7 @@ def escoger_rondas():
     rondas = 0
     while rondas != 3 and rondas != 5 and rondas != 10:
         rondas = int(input("¿Cuántas rondas quires jugar? Escoge entre 3, 5 o 10 rondas."))
-        if rondas == 3 or rondas == 5 or rondas == 10: #Verifica si el usuario introduce 3,5 o 10
+        if rondas == 3 or rondas == 5 or rondas == 10: # Verifica si el usuario introduce 3,5 o 10
             print("Has seleccionado:", rondas, "rondas.")
             return rondas
         else:
@@ -28,9 +32,9 @@ def escoger_rondas():
 
 def escoger_dificultad():
     dificultad = ""
-    while dificultad != "facil" and dificultad != "normal" and dificultad != "dificil":
+    while dificultad != FACIL and dificultad != NORMAL and dificultad != DIFICIL:
         dificultad = input("Escoge la dificultad que quieras. Facil/Normal/Dificil").lower()
-        if dificultad != "facil" or dificultad != "normal" or dificultad != "dificil":
+        if dificultad != FACIL or dificultad != NORMAL or dificultad != DIFICIL:
             print("Selecciona una opcion válida")
     return dificultad
 
@@ -62,13 +66,15 @@ def eleccion_ordenador(dificultad, eleccion_jugador):
             return random.randint(PIEDRA, TIJERA)
         else: # 20% de elegir la opcion ganadora 
             return (eleccion_jugador + 1) % 3 
-    else: #dificultad normal
+    else: # Dificultad normal
         return random.randint(0,2) # Escoge aleatoriamente
     
     
 def puntuacion (rondas, dificultad):
     puntos_jugador = 0
     puntos_ordenador = 0
+    racha_jugador = 0
+    racha_ordenador = 0
 
     while puntos_jugador < rondas and puntos_ordenador < rondas:
 
@@ -77,18 +83,31 @@ def puntuacion (rondas, dificultad):
 
         if jugador == ordenador:
             print("Empate")
+            racha_jugador = 0
+            racha_ordenador = 0
         elif (jugador == PIEDRA and ordenador == TIJERA) or (jugador == PAPEL and ordenador == PIEDRA) or (jugador == TIJERA and ordenador == PAPEL):
-            puntos_jugador += 1 #Se suma en 1 el valor de los puntos del jugador 
+            puntos_jugador += 1 # Se suma en 1 el valor de los puntos del jugador 
+            racha_jugador += 1  # Se suma en 1 el valor de la racha de victorias del jugador 
+            racha_ordenador = 0
             print("Ganaste la ronda")
         else:
-            puntos_ordenador += 1 #Se suma en 1 el valor de los puntos del ordenador
+            puntos_ordenador += 1 # Se suma en 1 el valor de los puntos del ordenador
+            racha_ordenador += 1 # Se suma en 1 el valor de la racha de victorias del ordenador
+            racha_jugador = 0
             print("Perdiste la ronda")
         
-        print("Tus puntos:", puntos_jugador, "Puntos ordenador:", puntos_ordenador)
+        if racha_jugador == 3 and (dificultad == FACIL or dificultad == NORMAL):
+            puntos_jugador += 1
+            print("Has conseguido una racha de 3, ganas un pun to extra.")
+            racha_jugador = 0 # Se reinicia la racha
 
-        if puntos_jugador == rondas: #se termina cuando los puntos de jugador sean igual a las rondas seleccionadas
+        if racha_ordenador == 3: ###################################################################
+
+            print("Tus puntos:", puntos_jugador, "Puntos ordenador:", puntos_ordenador)
+
+        if puntos_jugador == rondas: # Se termina cuando los puntos de jugador sean igual a las rondas seleccionadas
             print("Felicidades, ganaste la partida")
-        if puntos_ordenador == rondas: #se termina cuando los puntos del ordenador sean igual a las rondas seleccionadas
+        if puntos_ordenador == rondas: # Se termina cuando los puntos del ordenador sean igual a las rondas seleccionadas
             print("Perdiste la partida, vuelve a intentarlo")
         
 
