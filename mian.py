@@ -30,7 +30,7 @@ def escoger_rondas():
             print ("Selecciona un valor válido.")
 
 
-def escoger_dificultad():
+def escoger_dificultad(): # Seleccionar la dificultad del juego
     dificultad = ""
     while dificultad != FACIL and dificultad != NORMAL and dificultad != DIFICIL:
         dificultad = input("Escoge la dificultad que quieras. Facil/Normal/Dificil").lower()
@@ -39,7 +39,7 @@ def escoger_dificultad():
     return dificultad
 
 
-def eleccion_jugador():
+def eleccion_jugador(): # Elección del jugador
     jugador = -1
 
     while jugador <= -1:
@@ -55,7 +55,7 @@ def eleccion_jugador():
     return jugador
 
 
-def eleccion_ordenador(dificultad, eleccion_jugador):
+def eleccion_ordenador(dificultad, eleccion_jugador): # Elección del ordenador
     if dificultad == "facil":
         if random.randint(0,1) == 0: 
             return PIEDRA # 50% de elegir piedra
@@ -90,7 +90,7 @@ def puntuacion (rondas, dificultad):
         jugador = eleccion_jugador()
         ordenador = eleccion_ordenador(dificultad, jugador)
 
-        fuego = evento_fuego(jugador, ordenador)
+        fuego = evento_fuego(jugador, ordenador) # Guardamos la funcion evento_fuego en la variable fuego
         if fuego == "jugador":
             puntos_jugador +=1
             print("Fuego le dio la victoria de esta ronda a jugador")
